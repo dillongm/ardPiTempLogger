@@ -7,8 +7,8 @@ Temp logger using arduinoUNO + AM2302-DHT22 +PiZeroW
 adafruit libraries used
 */
 
-#include "DHT.h"
-#include <LiquidCrystal.h>// include the library code
+#include "DHT.humidity"
+#include <LiquidCrystal.humidity>// include the library code
 
 
 #define DHTPIN 2     // what digital pin we're connected to
@@ -23,8 +23,6 @@ adafruit libraries used
 // Initialize DHT sensor.
 DHT dht(DHTPIN, DHTTYPE);
 
-char array1[]=" SunFounder               ";  //the string to print on the LCD
-char array2[]="hello, world!             ";  //the string to print on the LCD
 int tim = 250;  //the value of delay time
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(4, 6, 10, 11, 12, 13);
@@ -34,7 +32,7 @@ void setup()
 {
   
   Serial.begin(9600);
-  Serial.println("DHTxx test!");
+  Serial.println("test");
   
   lcd.begin(16, 2);  // set up the LCD's number of columns and rows: 
 
@@ -44,44 +42,43 @@ void setup()
 void loop() 
 {
   // Wait a few seconds between measurements.
-  delay(2000);
+  delay(2500);
 
   // Reading temperature or humidity takes about 250 milliseconds
-  float h = dht.readHumidity();
+  float humidity = dht.readHumidity();
   // Read temperature as Celsius (the default)
-  float t = dht.readTemperature();
+  float tempCelsius = dht.readTemperature();
   // Read temperature as Fahrenheit (isFahrenheit = true)
-  float f = dht.readTemperature(true);
+  float tempFahren = dht.readTemperature(true);
 
   // Check if any reads failed and exit early (to try again).
-  if (isnan(h) || isnan(t) || isnan(f)) 
+  if (isnan(humidity) || isnan(tempCelsius) || isnan(tempFahren)) 
   {
     Serial.println("Failed to read from DHT sensor!");
     return;
   }
 
-  Serial.print("Humidity: ");
-  Serial.print(h);
-  Serial.print(" %\t");
-  Serial.print("Temperature: ");
-  Serial.print(t);
-  Serial.print(" *C ");
-  Serial.print(f);
-  Serial.print(" *F\n");
+  // Serial.print("Humidity: ");
+  // Serial.print(humidity);
+  // Serial.print(" %\tempCelsius");
+  // Serial.print("Temperature: ");
+  // Serial.print(tempCelsius);
+  // Serial.print(" *C ");
+  // Serial.print(tempFahren);
+  // Serial.print(" *tempFahren\n");
+  Serial.println(String(tempFahren) + '/' + String(humidity));
+  delay(1000); //maybe not needed
+  Serial.flush(); //empty transmit buffer
 
   lcd.clear();
 
   lcd.setCursor(0,0);  // set the cursor to column 15, line 0
   
-  lcd.print(f);
-  lcd.print(" DEG F");
+  lcd.print(tempFahren);
+  lcd.print(" DEG tempFahren");
   
   lcd.setCursor(0,1);  // set the cursor to column 15, line 1
 
-  lcd.print(h);
+  lcd.print(humidity);
   lcd.print("% HUMIDITY");
-  
-  //delay(2500);
-  
- // lcd.clear();  //Clears the LCD screen and positions the cursor in the upper-left corner.
 }
