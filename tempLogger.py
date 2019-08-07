@@ -7,6 +7,7 @@
 #log data to file and attach timestamps to each read
 import serial
 
+#obtain serial data
 try:
 	arduino = serial.Serial("/dev/ttyACM0",timeout = 1)
 except:
@@ -19,3 +20,5 @@ while count < 3:
 	rawData.append(str(arduino.readline()))
 	count = count + 1
 print(rawData)
+
+#
