@@ -54,7 +54,7 @@ void loop()
   // Check if any reads failed and exit early (to try again).
   if (isnan(humidity) || isnan(tempCelsius) || isnan(tempFahren)) 
   {
-    Serial.println("Failed to read from DHT sensor!");
+    Serial.println("failed to read from DHT");
     return;
   }
 
@@ -66,7 +66,7 @@ void loop()
   // Serial.print(" *C ");
   // Serial.print(tempFahren);
   // Serial.print(" *tempFahren\n");
-  Serial.println(String(tempFahren) + '/' + String(humidity) + ';');//example of serial: "80.96/50.20;", slash splits temp and humid, semicolon signals end of message
+  Serial.println(String(tempFahren) + ',' + String(humidity));//example of serial: "80.96,50.20" 
   delay(1000); //maybe not needed
   Serial.flush(); //empty transmit buffer
 
