@@ -12,10 +12,10 @@ try:
 except:
 	print('Error')
 
-data= []
+rawData= []
 count= 0
 
 while count < 3:
-	rawdata.append(str(arduino.readline()))
+	rawData.append(str(arduino.readline()))
 	count = count + 1
 print(data)
