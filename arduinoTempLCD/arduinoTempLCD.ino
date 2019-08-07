@@ -75,7 +75,7 @@ void loop()
   lcd.setCursor(0,0);  // set the cursor to column 15, line 0
   
   lcd.print(tempFahren);
-  lcd.print(" DEG tempFahren");
+  lcd.print(" DEG F");
   
   lcd.setCursor(0,1);  // set the cursor to column 15, line 1
 
