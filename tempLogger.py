@@ -18,4 +18,4 @@ count= 0
 while count < 3:
 	rawData.append(str(arduino.readline()))
 	count = count + 1
-print(data)
+print(rawData)
